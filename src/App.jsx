@@ -5,7 +5,7 @@ const FOOD_ITEMS = [
     id: 1,
     name: "Margherita Pizza",
     description: "Classic delight with 100% real mozzarella cheese.",
-    price: 799, // ₹799
+    price: 799,
     image:
       "https://images.unsplash.com/photo-1601924582977-3bdc1d81f203?auto=format&fit=crop&w=400&q=80",
   },
@@ -13,7 +13,7 @@ const FOOD_ITEMS = [
     id: 2,
     name: "Veggie Burger",
     description: "Loaded with fresh veggies and tasty sauce.",
-    price: 499, // ₹499
+    price: 499,
     image:
       "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=400&q=80",
   },
@@ -21,7 +21,7 @@ const FOOD_ITEMS = [
     id: 3,
     name: "Caesar Salad",
     description: "Fresh romaine with parmesan and croutons.",
-    price: 399, // ₹399
+    price: 399,
     image:
       "https://images.unsplash.com/photo-1552332386-f8dd00dc2fbb?auto=format&fit=crop&w=400&q=80",
   },
@@ -29,7 +29,7 @@ const FOOD_ITEMS = [
     id: 4,
     name: "Spaghetti Bolognese",
     description: "Hearty Italian pasta with a rich meat sauce.",
-    price: 849, // ₹849
+    price: 849,
     image:
       "https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=400&q=80",
   },
@@ -37,7 +37,7 @@ const FOOD_ITEMS = [
     id: 5,
     name: "Chocolate Cake",
     description: "Decadent and moist chocolate layered cake.",
-    price: 299, // ₹299
+    price: 299,
     image:
       "https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=400&q=80",
   },
@@ -45,7 +45,7 @@ const FOOD_ITEMS = [
     id: 6,
     name: "Sushi Platter",
     description: "Assorted fresh sushi rolls with wasabi and soy sauce.",
-    price: 1299, // ₹1299
+    price: 1299,
     image:
       "https://images.unsplash.com/photo-1553621042-f6e147245754?auto=format&fit=crop&w=400&q=80",
   },
@@ -61,7 +61,6 @@ export default function App() {
     0
   );
 
-  // Add item to cart, or increase quantity
   function addToCart(item) {
     setCartItems((prev) => {
       const exists = prev.find((ci) => ci.id === item.id);
@@ -82,6 +81,7 @@ export default function App() {
       )
     );
   }
+
   function decreaseQuantity(id) {
     setCartItems((prev) =>
       prev
@@ -91,11 +91,13 @@ export default function App() {
         .filter((item) => item.quantity > 0)
     );
   }
+
   function removeItem(id) {
     setCartItems((prev) => prev.filter((item) => item.id !== id));
   }
+
   function handleCheckout() {
-    alert(`Thank you for your order! Your total is ₹${totalPrice.toFixed(2)}.`);
+    alert(`Thank you for your order! Your total is ₹${totalPrice}.`);
     setCartItems([]);
     setIsCartOpen(false);
   }
@@ -103,13 +105,13 @@ export default function App() {
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col w-full overflow-x-hidden">
       {/* Header */}
-      <header className="fixed top-0 left-0 right-0 z-20 bg-white shadow-md flex items-center justify-between px-4 sm:px-8 h-16 w-full">
+      <header className="fixed top-0 left-0 w-full z-30 bg-white shadow-md flex items-center justify-between px-4 sm:px-8 h-16">
         <div className="flex items-center gap-2">
           <span className="text-2xl font-bold text-indigo-600 select-none">
             🍽️
           </span>
           <span className="text-xl sm:text-2xl font-semibold text-gray-800 select-none">
-            Potato Bites
+            FoodieBite
           </span>
         </div>
         <button
@@ -138,42 +140,45 @@ export default function App() {
         </button>
       </header>
 
-      {/* Main */}
       <main className="flex-1 pt-16 w-full">
         {/* Hero Section */}
         <section
-          className="relative bg-cover bg-center flex items-center justify-center text-center w-full"
+          className="relative w-full flex items-center justify-center text-center"
           style={{
             backgroundImage:
               "url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1470&q=80')",
+            backgroundSize: "cover",
+            backgroundPosition: "center",
             minHeight: "70vh",
           }}
         >
-          <div className="absolute inset-0 bg-black bg-opacity-40 rounded-b-3xl"></div>
-          <div className="relative max-w-2xl mx-auto text-white space-y-6 px-4 py-10">
-            <h2 className="text-4xl sm:text-5xl font-bold drop-shadow-lg">
-              Crave. Click. Delivered.
-            </h2>
-            <p className="text-lg sm:text-xl drop-shadow-md">
-              Your favorite meals, delivered fast and fresh to your door.
-            </p>
-            <button
-              onClick={() =>
-                document
-                  .getElementById("menu-section")
-                  .scrollIntoView({ behavior: "smooth" })
-              }
-              className="inline-block px-6 py-3 bg-indigo-600 hover:bg-indigo-700 rounded-full font-semibold text-white shadow-md transition"
-            >
-              Explore Menu
-            </button>
+          <div className="absolute inset-0 bg-black bg-opacity-40"></div>
+          <div className="relative w-full flex flex-col items-center justify-center py-16 px-4">
+            <div className="max-w-2xl w-full mx-auto space-y-6">
+              <h2 className="text-white text-4xl sm:text-5xl font-bold drop-shadow-lg">
+                Crave. Click. Delivered.
+              </h2>
+              <p className="text-white text-lg sm:text-xl drop-shadow-md">
+                Your favorite meals, delivered fast and fresh to your door.
+              </p>
+              <button
+                onClick={() =>
+                  document
+                    .getElementById("menu-section")
+                    .scrollIntoView({ behavior: "smooth" })
+                }
+                className="inline-block px-6 py-3 bg-indigo-600 hover:bg-indigo-700 rounded-full font-semibold text-white shadow-md transition"
+              >
+                Explore Menu
+              </button>
+            </div>
           </div>
         </section>
 
         {/* Menu Section */}
         <section
           id="menu-section"
-          className="w-full max-w-7xl mx-auto mt-12 px-4 sm:px-8 pb-12 flex flex-col"
+          className="w-full max-w-7xl mx-auto mt-12 px-4 sm:px-8 pb-12"
         >
           <h3 className="text-3xl font-bold text-gray-800 mb-8 text-center sm:text-left">
             Our Menu
@@ -199,7 +204,7 @@ export default function App() {
                   </p>
                   <div className="flex items-center justify-between">
                     <span className="font-bold text-indigo-600 text-lg">
-                      ₹{food.price.toFixed(2)}
+                      ₹{food.price}
                     </span>
                     <button
                       onClick={() => addToCart(food)}
@@ -216,7 +221,7 @@ export default function App() {
         </section>
       </main>
 
-      {/* Cart Side Panel and Overlay - Only When Open */}
+      {/* Cart Side Panel and Overlay - Only Rendered When Open */}
       {isCartOpen && (
         <>
           {/* Overlay */}
@@ -278,9 +283,9 @@ export default function App() {
                         {item.name}
                       </h5>
                       <p className="text-indigo-600 font-bold mt-1">
-                        ₹{(item.price * item.quantity).toFixed(2)}{" "}
+                        ₹{item.price * item.quantity}{" "}
                         <span className="text-gray-500 font-normal text-sm">
-                          (₹{item.price.toFixed(2)} each)
+                          (₹{item.price} each)
                         </span>
                       </p>
                       <div className="mt-2 flex items-center space-x-2">
@@ -292,7 +297,7 @@ export default function App() {
                           −
                         </button>
                         <span
-                          className="w-7 text-center"
+                          className="w-8 min-w-[2rem] h-8 flex items-center justify-center text-center font-semibold text-gray-700 bg-white rounded"
                           aria-live="polite"
                           aria-atomic="true"
                         >
@@ -335,7 +340,7 @@ export default function App() {
               <footer className="p-4 border-t border-gray-200 bg-white">
                 <p className="text-lg font-semibold text-gray-900 mb-4 flex justify-between">
                   <span>Total:</span>
-                  <span>₹{totalPrice.toFixed(2)}</span>
+                  <span>₹{totalPrice}</span>
                 </p>
                 <button
                   onClick={handleCheckout}
